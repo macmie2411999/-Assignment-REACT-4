@@ -1,19 +1,24 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { TableStudent } from './TableStudent'
+
+// import without {}
+import TableStudent from './TableStudent'
 
 export class StudentManage extends Component {
 
-    handleSubmit = (e) => {
+    handleSubmit = e => {
         e.preventDefault();
-        let taiKhoan = document.getElementById('taiKhoan').value;
-        let matKhau = document.getElementById('matKhau').value;
-        let nguoiDung = { taiKhoan, matKhau };
+        let idStudent = document.getElementById('idStudent').value;
+        let nameStudent = document.getElementById('nameStudent').value;
+        let phoneNumber = document.getElementById('phoneNumber').value;
+        let email = document.getElementById('email').value;
 
+        let newStudent = { idStudent, nameStudent, phoneNumber, email };
+        console.log(newStudent);
         // tao ra action dua du lieu len reducer
         const action = {
             type: 'ADD_NEW_STUDENT',
-            payload: nguoiDung
+            payload: newStudent
         }
 
         // dung ham dispatch de dua len reducer
@@ -21,6 +26,7 @@ export class StudentManage extends Component {
     }
 
     render() {
+        let { arrayStudentReducer } = this.props;
         return (
             <div>
                 <hr style={{ marginBottom: '30px' }}></hr>
@@ -38,21 +44,21 @@ export class StudentManage extends Component {
                             <div className="row">
                                 <div className="col-6">
                                     <p>Student ID</p>
-                                    <input className='form-control' id="idStudent" name="idStudent"></input>
+                                    <input className='form-control' id="idStudent" name="idStudent" type="text" required></input>
                                 </div>
                                 <div className="col-6">
                                     <p>Name</p>
-                                    <input className='form-control' id="nameStudent" name="nameStudent"></input>
+                                    <input className='form-control' id="nameStudent" name="nameStudent" type="text" required></input>
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="col-6">
                                     <p>Phone Number</p>
-                                    <input className='form-control' id="phoneNumber" name="phoneNumber"></input>
+                                    <input className='form-control' id="phoneNumber" name="phoneNumber" type="number" required></input>
                                 </div>
                                 <div className="col-6">
                                     <p>Email</p>
-                                    <input className='form-control' id="email" name="email"></input>
+                                    <input className='form-control' id="email" name="email" type="text" required></input>
                                 </div>
                             </div>
                         </div>
@@ -60,6 +66,7 @@ export class StudentManage extends Component {
                         {/* Footer */}
                         <div className="card-footer">
                             <button className='btn btn-success' type='submit'>Add Student</button>
+                            <button className='btn btn-success' type='submit'>Update Student</button>
                         </div>
                     </div>
                 </form>

@@ -13,7 +13,9 @@ import { StudentManage } from './StudentManage/StudentManage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <>
-    <StudentManage store={store}/>
-  </>
+  
+  <Provider store={store} >
+    <StudentManage />
+  </Provider>
+    
 )
